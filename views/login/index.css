@@ -1,0 +1,10 @@
+.form-wrapper{
+	width: 400px;
+	margin: 0 auto;
+	position: relative;
+	top: 30%;
+}
+
+.validationMessage{
+	color: #ff0000;
+}

@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<link rel="stylesheet" 
+				type="text/css" 
+				href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"></link>
+		<link rel="stylesheet" 
+				type="text/css" href="index.css"></link>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	</head>
+	<body>
+		
+		<div class="form-wrapper">
+			<form role="form" data-bind="with: userFormData">
+				<p class="form-group">
+					<label> UserName </label>
+					<br>
+					<input class="form-control" type="text" name="username" data-bind="value: username, valueUpdate:'afterkeydown'"/>
+				</p>
+				<p class="form-group">
+					<label> Password </label>
+					<br>
+					<input class="form-control" type="password" name="password" data-bind="value: password, valueUpdate:'afterkeydown'"/>
+				</p>
+				<input type="submit" class="btn btn-primary" value="Log In" data-bind="click: $parent.login"></submit>
+			</form>	
+		</div>
+		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
+		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/knockout-validation/1.0.2/knockout.validation.min.js"></script>
+		<script type="text/javascript" src="index.js"></script>
+	</body>
+
+<html>
