@@ -20,6 +20,11 @@ function viewModel(){
 		var validateForm = ko.validation.group(that.userFormData, {deep: true});
 		if(validateForm().length === 0){
 			// Make ajax call to send the data
+			$.ajax({
+				  url: "/login/submit",
+				  type: "POST",
+				  data: { id : 1 }
+				});
 		}
 	};
 }
