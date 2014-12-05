@@ -90,6 +90,7 @@ app.prototype.render = function(filePath){
 		request = this.request,
 		response = this.response,
 		that = this;
+
 	console.log(requestedFilePath + request.method);
 	switch(request.method){
 		case 'GET':  
@@ -162,6 +163,7 @@ app.prototype.startServer = function(port){
 
 		http.createServer(function(request, response){
 			if(!!request){
+				//console.log(request.url);
 				var parsedUrl = url.parse(request.url),
 					routeFound = false;
 				console.log("Url : "+parsedUrl.pathname);

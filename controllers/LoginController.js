@@ -1,10 +1,10 @@
 "use strict";
 
 var loginController = new controller("login");
-var viewengine = new viewEngine();
+var _view = new view("login");
 
 loginController.setAction("/index", "GET", function(req, res){
-	viewengine.renderView("login/index");
+	_view.renderView("index");
 });
 
 loginController.setAction("/submit", "POST", function(req, res){

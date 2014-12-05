@@ -2,7 +2,7 @@
 
 global.app = require("./app");
 global.controller = require("./controller");
-global.viewEngine = require("./viewengine");
+global.view = require("./view");
 
 //console.log(app.config.controllerPath);
 app.initLoad();
