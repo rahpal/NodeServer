@@ -7,6 +7,9 @@ var http = require("http"),
 	mime = require("mime"),
 	root = __dirname;
 
+// include external apis
+var auth = require('./auth');
+
 function errorFactory(){
 	// Error Code
 
@@ -69,13 +72,20 @@ app.prototype.initLoad = function(){
 	}
 };
 
-app.prototype.setPath = function(path, httpMethod, callback){
+app.prototype.setPath = function(path, httpMethod, callback, attribute){
 	///<summary> Setting path and its corresponding action callback </summary>
+
+	this.routes.forEach(function(route, index, routes){
+		if(route["path"].toLowerCase() === path.toLowerCase()){
+			throw new Error("Duplicate routes present. Cannot procees further...");
+		}
+	});
 
 	this.routes.push({
 		path : path, // url (relative)
 		httpMethod : httpMethod,  // GET or POST
-		callback : callback  // callback function
+		callback : callback,  // callback function
+		attribute : !!attribute ? attribute: {auth: false}
 	});
 
 	//console.log(this.routes);
@@ -172,6 +182,14 @@ app.prototype.startServer = function(port){
 						that.request = request;
 						that.response = response;
 						//console.log(path.extname(parsedUrl.pathname));
+						console.log("auth: "+route.attribute.auth);
+						// check for authorization/ authentication
+						if(route.attribute.auth && !auth.onAuthorization.call(that)){
+							response.statusCode = that.errors.UNAUTHORIZED;
+							response.end(that.errors.unauthorized());
+							return;
+						}
+
 						if(path.extname(parsedUrl.pathname) === ""){
 							route.callback.bind(that, request, response)();
 						}else{

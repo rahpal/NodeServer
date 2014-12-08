@@ -15,20 +15,29 @@ function viewModel(){
 		password : ko.observable().extend({ required: true, maxLength: 12 })
 	};
 	
-	that.login = function(){
+	that.update = function(){
 		// send data to server
 		var validateForm = ko.validation.group(that.userFormData, {deep: true});
 		if(validateForm().length === 0){
 			// Make ajax call to send the data
 			$.ajax({
-				  url: "/login/submit",
+				  url: "/home/update",
 				  type: "POST",
-				  data: { id : 1 }
-				}).success(function(response){
-					//alert(JSON.stringify(response));
-					location.href = "/home/index";
+				  data: { id : 1 },
+				  beforeSend: function(xhr){xhr.setRequestHeader('csrf_token', 'drapal');},
 				});
 		}
+	};
+
+	that.update1 = function(){
+		// send data to server
+		
+		$.ajax({
+			  url: "/home/update",
+			  type: "POST",
+			  data: { id : 1 },
+			  beforeSend: function(xhr){xhr.setRequestHeader('csrf_token', 'drapal');},
+			});
 	};
 }
 

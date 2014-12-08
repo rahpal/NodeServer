@@ -9,7 +9,7 @@ var controller = (function (){
 		var that = this;
 
 		that.name = name;
-		that.setAction = function(actionName, verb, callback){
+		that.setAction = function(actionName, verb, callback, attr){
 			var fullyQualifiedPath;
 
 			if(actionName.indexOf('/') === -1){
@@ -20,7 +20,7 @@ var controller = (function (){
 
 			app.setPath(fullyQualifiedPath, verb, function(req, res){
 				callback(req, res);
-			});
+			}, attr);
 		};
 	};
 
