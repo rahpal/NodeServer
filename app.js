@@ -191,7 +191,7 @@ app.prototype.startServer = function(port){
 						}
 
 						if(path.extname(parsedUrl.pathname) === ""){
-							route.callback.bind(that, request, response)();
+							route.callback.call(that, request, response);
 						}else{
 							// render assocaited files here.
 							that.render(parsedUrl.pathname.toLowerCase());

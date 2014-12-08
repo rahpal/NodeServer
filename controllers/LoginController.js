@@ -7,10 +7,6 @@ loginController.setAction("/index", "GET", function(req, res){
 	_view.renderView("index");
 });
 
-loginController.setAction("/index", "GET", function(req, res){
-	_view.renderView("index");
-});
-
 loginController.setAction("/submit", "POST", function(req, res){
 	//viewengine.renderView("login/submit");
 	// Get the data and check the request object.
@@ -19,8 +15,8 @@ loginController.setAction("/submit", "POST", function(req, res){
 		console.log("data rec:"+chunk);
 	});
 
-	req.on("end", function(chunk){
-		res.setHeader("Set-Cookie", "cookie=test");
+	req.on("end", function(){
+		//res.setHeader("Set-Cookie", "cookie=test");
 		res.write(JSON.stringify({'csrf_token': 'drapal'}));
 		res.end();
 	});

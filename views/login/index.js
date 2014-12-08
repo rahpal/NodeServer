@@ -14,8 +14,8 @@ function viewModel(){
 		username : ko.observable().extend({ required: true, maxLength: 20 }),
 		password : ko.observable().extend({ required: true, maxLength: 12 })
 	};
-	
-	that.login = function(){
+
+	that.loginUser = function(){
 		// send data to server
 		var validateForm = ko.validation.group(that.userFormData, {deep: true});
 		if(validateForm().length === 0){
@@ -29,6 +29,10 @@ function viewModel(){
 					location.href = "/home/index";
 				});
 		}
+	};
+
+	that.registerUser = function(){
+		location.href = '/login/register';
 	};
 }
 

@@ -1,4 +1,6 @@
 //Authentication and authorization
+"use strict";
+
 var _auth = (function(){
 
 	var url = require("url");
