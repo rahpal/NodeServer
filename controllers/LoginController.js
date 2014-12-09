@@ -5,31 +5,22 @@ var _view = new view("login");
 
 var qs = require('querystring');
 var mysql = require('mysql');
+var utils = require('../utils');
 
 loginController.setAction("/index", "GET", function(req, res){
 	_view.renderView("index");
 });
 
 loginController.setAction("/login", "POST", function(req, res){
-	// Get the data and check the request object.
-	var payload = '';
+	console.log(utils);
 
-	req.setEncoding("utf8");
-	req.on("data", function(chunk){
-		payload+= chunk; 
-		console.log("data rec:"+chunk);
-	});
-
-	req.on("end", function(){
-		//res.setHeader("Set-Cookie", "cookie=test");
-		var parsedPayload = qs.parse(payload);
-		console.log(parsedPayload);
+	utils.getPayloadData(req, function(data){
 
 		var connection = mysql.createConnection(require('../connectionstring'));
 
 		connection.connect();
 
-		var query = connection.query("SELECT * FROM USERS WHERE Username = ? AND Password = ?", [parsedPayload.Username, parsedPayload.Password], function(err, results){
+		var query = connection.query("SELECT * FROM USERS WHERE Username = ? AND Password = ?", [data.Username, data.Password], function(err, results){
 			if(err) 
 				console.log(err.message);
 			else
@@ -42,9 +33,9 @@ loginController.setAction("/login", "POST", function(req, res){
 
 		});
 		//console.log(query.sql);
-
 		connection.end();
 	});
+
 });
 
 loginController.setAction("/register", "GET", function(req, res){
@@ -52,38 +43,24 @@ loginController.setAction("/register", "GET", function(req, res){
 });
 
 loginController.setAction("/submit", "POST", function(req, res){
-	var payload = '';
 
-	req.setEncoding("utf8");
-	req.on("data", function(chunk){
-		payload+= chunk; 
-		console.log("data rec:"+chunk);
-	});
+	utils.getPayloadData(req, function(data){
 
-	req.on("end", function(){
-		//res.setHeader("Set-Cookie", "cookie=test");
-		var parsedPayload = qs.parse(payload);
-		console.log(parsedPayload);
-		
-		res.write(JSON.stringify({'csrf_token': 'drapal'}));
-		//res.end();
 		var connection = mysql.createConnection(require('../connectionstring'));
 
 		connection.connect();
 
-		var query = connection.query("INSERT INTO Users SET ?", parsedPayload, function(err){
+		var query = connection.query("INSERT INTO Users SET ?", data, function(err){
 			if(err) 
 				console.log(err.message);
 			else
 				console.log("user created");
 		}); 
-
 		//console.log(query.sql);
-
 		connection.end();
 
 		res.end();
-		});
+	});
 });
 
 loginController.setAction("/contact", "GET", function(req, res){

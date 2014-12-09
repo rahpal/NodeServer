@@ -1,5 +1,5 @@
 //Authentication and authorization
-"use strict";
+"use strict";				
 
 var _auth = (function(){
 

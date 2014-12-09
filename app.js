@@ -177,7 +177,9 @@ app.prototype.startServer = function(port){
 					routeFound = false;
 				console.log("Url : "+parsedUrl.pathname);
 				that.routes.forEach(function(route, index, array){
-					if(parsedUrl.pathname.toLowerCase().indexOf(route.path.toLowerCase()) !== -1){
+					if(parsedUrl.pathname.toLowerCase().indexOf(route.path.toLowerCase()) !== -1
+						&& route.httpMethod.toLowerCase() === request.method.toLowerCase()){
+						// Extract req header body payload.
 						that.request = request;
 						that.response = response;
 						//console.log(path.extname(parsedUrl.pathname));
