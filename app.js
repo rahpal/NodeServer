@@ -3,7 +3,6 @@
 var http = require("http"),
 	fs = require('fs'),
 	path = require("path"),
-	fs = require("fs"),
 	mime = require("mime"),
 	root = __dirname;
 

@@ -20,13 +20,24 @@ function viewModel(){
 		var validateForm = ko.validation.group(that.userFormData, {deep: true});
 		if(validateForm().length === 0){
 			// Make ajax call to send the data
+			var formData ={
+				Username: that.userFormData.username(),
+				Password: that.userFormData.password(),
+			};
 			$.ajax({
-				  url: "/login/submit",
+				  url: "/login/login",
 				  type: "POST",
-				  data: { id : 1 }
-				}).success(function(response){
+				  data: formData
+				}).success(function(response, data){
 					//alert(JSON.stringify(response));
-					location.href = "/home/index";
+					var parsedResponse = JSON.parse(response);
+					if(parsedResponse.isValid){
+						location.href = "/home/index";
+					}else{
+						alert("Invalid Credentials");
+					}
+				}).error(function(){
+					alert("Error");
 				});
 		}
 	};

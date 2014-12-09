@@ -24,21 +24,21 @@ function viewModel(){
 		if(validateForm().length === 0){
 			// Make ajax call to send the data
 			var formData = {
-				username: that.registerFormData.username(),
-				firstname: that.registerFormData.firstname(),
-				lastname: that.registerFormData.lastname(),
-				email: that.registerFormData.email(),
-				password: that.registerFormData.password()
+				Username: that.registerFormData.username(),
+				Firstname: that.registerFormData.firstname(),
+				Lastname: that.registerFormData.lastname(),
+				Email: that.registerFormData.email(),
+				Password: that.registerFormData.password()
 			}
 
 			$.ajax({
 				  url: "/login/submit",
 				  type: "POST",
-				  data: JSON.stringify(formData),
+				  data: formData,
 				}).success(function(response){
 					//alert(JSON.stringify(response));
 					alert("data entered");
-					location.href = '/login/index';
+					//location.href = '/login/index';
 				}).error(function(err){
 					//
 				});
