@@ -8,21 +8,15 @@
 	</head>
 	<body>
 		
-		<div class="form-wrapper">
-			<form role="form" data-bind="with: userFormData">
-				<p class="form-group">
-					<input class="form-control" type="text" name="username" data-bind="value: username, valueUpdate:'afterkeydown'"/>
-				</p>
-				<p class="form-group">
-					<input class="form-control" type="password" name="password" data-bind="value: password, valueUpdate:'afterkeydown'"/>
-				</p>
-				<input type="submit" class="btn btn-primary" value="Update" data-bind="click: $parent.update"></submit>
-				<input type="submit" class="btn btn-primary" value="Update1" data-bind="click: $parent.update1"></submit>
-			</form>	
+		<div class="top-wrapper">
+			<header>
+				<span>Welcome, </span>
+				<label data-bind="text: 'User'"></label>
+			</header>
 		</div>
 		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
-		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/knockout-validation/1.0.2/knockout.validation.min.js"></script>
-		<script type="text/javascript" src="index.js"></script>
+		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/knockout-validation/1.0.2/knockout.validation.min.js" defer></script>
+		<script type="text/javascript" src="index.js" defer></script>
 	</body>
 
 <html>

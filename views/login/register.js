@@ -18,6 +18,8 @@ function viewModel(){
 		password : ko.observable().extend({ required: true, maxLength: 12 })
 	};
 
+	that.messageBar = ko.observable(false);
+
 	that.submitUser = function(){
 		// send data to server
 		var validateForm = ko.validation.group(that.registerFormData, {deep: true});
@@ -37,11 +39,13 @@ function viewModel(){
 				  data: formData,
 				}).success(function(response){
 					//alert(JSON.stringify(response));
-					alert("data entered");
+					that.messageBar(true);
 					//location.href = '/login/index';
 				}).error(function(err){
-					//
+					// handle error
 				});
+		}else{
+			validateForm.showAllMessages(true);
 		}
 	};
 }

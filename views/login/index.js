@@ -39,6 +39,8 @@ function viewModel(){
 				}).error(function(){
 					alert("Error");
 				});
+		}else{
+			validateForm.showAllMessages(true);
 		}
 	};
 
